@@ -5,7 +5,7 @@
 #include <fstream>
 #include <iostream>
 #include <boost/regex.hpp>
-
+#include <boost/format.hpp>
 
 using namespace MySearch;
 
@@ -26,7 +26,7 @@ FileSearch::checkFile()
     bool rc = true;
     if (mFileInfo->getFileSize() > SConfiguration::getInstance()->getMaxSizeOfFile() ) {
         rc = false;
-        log_error("FileOp::checkFile: the size of file execeeds the max size that is supported.");
+        log_error(boost::str(boost::format("The size of %1% execeeds the max size that is supported.") % mFileName ));
     }
     return rc;
 }
@@ -34,8 +34,7 @@ FileSearch::checkFile()
 bool
 FileSearch::search(const std::string &regex)
 {
-    std::string func = "FileOp::search";
-    log_debug(func + ": File: " + mFileName + " Regex: " + regex);
+    log_debug(boost::str(boost::format("File: %1%, Regex: %2%") % mFileName % regex));
     bool rc = false;
 
     if (checkFile()) {

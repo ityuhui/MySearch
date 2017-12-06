@@ -31,13 +31,15 @@ ObjectOp::checkObject(const std::string &path)
 {
     boostfs::path p(path);
     if (boostfs::exists(p)) {
+        std::string msg = std::string("Search ") + path  ;
+        log_debug(msg);
         if (boostfs::is_regular_file(p)) {
             mOSearch = std::make_shared<FileSearch>(path);
         } else if (boostfs::is_directory(p)) {
             mOSearch = std::make_shared<DirSearch>(path);
         }
     } else {
-        std::string msg = std::string(__FUNCTION__) + ": " + path + " does not exist.";
+        std::string msg = path + " does not exist.";
         log_notify(msg);
         throw std::runtime_error(msg);
     }
