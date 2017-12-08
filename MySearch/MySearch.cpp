@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
         ("reg,r", opt::value<std::string>(), "Regular expression that to find")
         ("file,f", opt::value<std::string>(), "File or directory to parse, the default is current working directory")
         ("debug,g", "Enable debug log")
+        ("version,v", "Print version")
         ("help,h", "Print help message");
 
     if (argc == 1) {
@@ -29,6 +30,11 @@ int main(int argc, char *argv[])
     
     if (vm.count("help")) {
         std::cout << desc << "\n";
+        return 1; 
+    }
+    
+    if (vm.count("version")) {
+        std::cout << "Build: " << __DATE__ << " " <<  __TIME__ << "\n";
         return 1; 
     }
     
