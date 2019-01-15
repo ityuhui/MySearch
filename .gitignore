@@ -1,0 +1,9 @@
+Release/
+x64/
+ipch/
+*.VC.db
+.vs/
+*.vcxproj.*
+vcxproj.*
+*.vcxproj
+Debug/
